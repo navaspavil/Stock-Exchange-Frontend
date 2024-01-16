@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container mx-auto p-4">
+    <StockSearch @search="handleSearch"></StockSearch>
+    <StockDisplay v-if="data.length" :stockData="data"></StockDisplay>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StockSearch from "./components/StockSearch.vue";
+import StockDisplay from "./components/StockDisplay.vue";
+import axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    StockSearch,
+    StockDisplay,
+  },
+  data() {
+    return {
+      data: [],
+    };
+  },
+  methods: {
+    async handleSearch(searchParams) {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/search`, {
+          params: searchParams,
+        });
+        this.data = response.data.data.stockData;
+      } catch (error) {
+        console.error("Error fetching stock data:", error);
+        // Handle error
+      }
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
