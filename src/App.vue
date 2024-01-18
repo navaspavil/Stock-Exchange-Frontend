@@ -15,13 +15,11 @@
       :data="lineChartData"
       :key="chartKey"
     ></LineChart>
-    <StockDisplay v-if="data.length" :stockData="data"></StockDisplay>
   </div>
 </template>
 
 <script>
 import StockSearch from "./components/StockSearch.vue";
-import StockDisplay from "./components/StockDisplay.vue";
 import CandlestickChart from "./components/CandlestickChart.vue";
 import LineChart from "./components/LineChart.vue";
 import ToastComponent from "./components/Toast.vue";
@@ -31,14 +29,12 @@ export default {
   name: "App",
   components: {
     StockSearch,
-    StockDisplay,
     CandlestickChart,
     LineChart,
     ToastComponent,
   },
   data() {
     return {
-      data: [],
       candlestickData: [],
       lineChartData: [],
       selectedChartType: "candlestick",
