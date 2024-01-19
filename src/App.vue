@@ -62,9 +62,12 @@ export default {
     },
     async handleSearch(searchParams, isClicked = true) {
       try {
-        const response = await axios.get(`http://localhost:3000/api/search`, {
-          params: searchParams,
-        });
+        const response = await axios.get(
+          `${process.env.VUE_APP_API_HOSTNAME}/api/search`,
+          {
+            params: searchParams,
+          }
+        );
         this.data = response.data.data.stockData;
         this.processData(response.data.data);
         if (isClicked) {
