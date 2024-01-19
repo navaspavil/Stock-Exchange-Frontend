@@ -14,7 +14,10 @@ export default {
     },
   },
   mounted() {
-    const chart = createChart(this.$refs.chartContainer);
+    const chart = createChart(this.$refs.chartContainer, {
+      height: 300,
+      autoSize: true,
+    });
     const lineSeries = chart.addLineSeries();
     lineSeries.setData(this.data);
   },

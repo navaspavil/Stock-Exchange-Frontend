@@ -1,20 +1,24 @@
 <template>
-  <div class="container mx-auto p-4">
-    <toast-component ref="toast"></toast-component>
-    <StockSearch
-      @search="handleSearch"
-      @chart-type-selected="handleChartTypeChange"
-    ></StockSearch>
-    <CandlestickChart
-      v-if="selectedChartType === 'candlestick' && candlestickData.length"
-      :data="candlestickData"
-      :key="chartKey"
-    ></CandlestickChart>
-    <LineChart
-      v-if="selectedChartType === 'line' && lineChartData.length"
-      :data="lineChartData"
-      :key="chartKey"
-    ></LineChart>
+  <div
+    class="container mx-auto p-4 h-screen overflow-y-auto flex flex-col justify-around"
+  >
+    <div>
+      <toast-component ref="toast"></toast-component>
+      <StockSearch @search="handleSearch"></StockSearch>
+    </div>
+    <div class="mb-12 md:mb-24">
+      <SelectChart @chart-type-selected="handleChartTypeChange"></SelectChart>
+      <CandlestickChart
+        v-if="selectedChartType === 'candlestick' && candlestickData.length"
+        :data="candlestickData"
+        :key="chartKey"
+      ></CandlestickChart>
+      <LineChart
+        v-if="selectedChartType === 'line' && lineChartData.length"
+        :data="lineChartData"
+        :key="chartKey"
+      ></LineChart>
+    </div>
   </div>
 </template>
 
@@ -23,6 +27,7 @@ import StockSearch from "./components/StockSearch.vue";
 import CandlestickChart from "./components/CandlestickChart.vue";
 import LineChart from "./components/LineChart.vue";
 import ToastComponent from "./components/Toast.vue";
+import SelectChart from "./components/SelectChart.vue";
 import axios from "axios";
 
 export default {
@@ -32,6 +37,7 @@ export default {
     CandlestickChart,
     LineChart,
     ToastComponent,
+    SelectChart,
   },
   data() {
     return {

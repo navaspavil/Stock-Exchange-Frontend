@@ -16,6 +16,7 @@ export default {
   mounted() {
     const chart = createChart(this.$refs.chartContainer, {
       height: 300,
+      autoSize: true,
     });
     const candleSeries = chart.addCandlestickSeries({
       upColor: "#26a69a",
